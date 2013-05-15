@@ -1,18 +1,20 @@
 Summary:	Charisma - free, responsive, multiple skin admin template
 Name:		htmlgrid-charisma
 Version:	1.0.0
-Release:	1
+Release:	2
 License:	Apache v2.0
 Group:		Applications/WWW
 Source0:	https://github.com/usmanhalalit/charisma/archive/master.tar.gz?/charisma.tgz
 # Source0-md5:	b0278cac300ee0f6d22c957a124c4b0f
 Source1:	apache.conf
 Source2:	lighttpd.conf
+Source3:	httpd.conf
 URL:		http://usman.it/free-responsive-admin-template/
 BuildRequires:	rpmbuild(macros) >= 1.268
 Requires:	webapps
 Requires:	webserver(access)
 Requires:	webserver(alias)
+Conflicts:	apache-base < 2.4.0-1
 BuildArch:	noarch
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -67,7 +69,7 @@ cp -a js css img  $RPM_BUILD_ROOT%{_appdir}
 
 cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_sysconfdir}/apache.conf
 cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/lighttpd.conf
-cp -p $RPM_BUILD_ROOT%{_sysconfdir}/{apache,httpd}.conf
+cp -p %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/httpd.conf
 
 %triggerin -- apache1 < 1.3.37-3, apache1-base
 %webapp_register apache %{_webapp}
@@ -75,10 +77,10 @@ cp -p $RPM_BUILD_ROOT%{_sysconfdir}/{apache,httpd}.conf
 %triggerun -- apache1 < 1.3.37-3, apache1-base
 %webapp_unregister apache %{_webapp}
 
-%triggerin -- apache < 2.2.0, apache-base
+%triggerin -- apache-base
 %webapp_register httpd %{_webapp}
 
-%triggerun -- apache < 2.2.0, apache-base
+%triggerun -- apache-base
 %webapp_unregister httpd %{_webapp}
 
 %triggerin -- lighttpd
