@@ -1,7 +1,7 @@
 Summary:	Charisma - free, responsive, multiple skin admin template
 Name:		htmlgrid-charisma
 Version:	1.0.0
-Release:	1
+Release:	3
 License:	Apache v2.0
 Group:		Applications/WWW
 Source0:	https://github.com/usmanhalalit/charisma/archive/master.tar.gz?/charisma.tgz
